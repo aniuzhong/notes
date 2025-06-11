@@ -15,6 +15,7 @@
     - [Git Graph](#git-graph)
     - [vscode-icon](#vscode-icon)
     - [C/C++ Themes](#cc-themes)
+    - [Font Changer](#font-changer)
     - [Zoomer](#zoomer)
     - [Output Colorizer](#output-colorizer)
   - [launch.json](#launchjson)
@@ -133,6 +134,8 @@ After executing the command, restart Visual Studio Code for the changes to take 
 ```
 
 ### C/C++ Themes
+
+### Font Changer
 
 ### Zoomer
 
