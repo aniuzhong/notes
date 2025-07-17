@@ -39,6 +39,7 @@ After executing the command, restart Visual Studio Code for the changes to take 
 - **Linux**
 
     `~/.config/Code/User/settings.json`
+    `~/.vscode-server/data/Machine/settings.json`
 
 - **macOS**
 
