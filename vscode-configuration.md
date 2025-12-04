@@ -58,6 +58,7 @@ After executing the command, restart Visual Studio Code for the changes to take 
     "git.autofetch": true,
     "terminal.integrated.smoothScrolling": true,
     "workbench.list.smoothScrolling": true,
+    "workbench.editor.wrapTabs": true,
 }
 ```
 
