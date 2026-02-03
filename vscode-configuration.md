@@ -51,7 +51,7 @@ After executing the command, restart Visual Studio Code for the changes to take 
 {
     "editor.cursorBlinking": "smooth",
     "editor.cursorSmoothCaretAnimation": "on",
-    "editor.lineNumbers": "interval",
+    "editor.lineNumbers": "on",
     "editor.renderWhitespace": "all",
     "editor.smoothScrolling": true,
     "files.autoSave": "afterDelay",
