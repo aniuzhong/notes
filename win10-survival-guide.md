@@ -29,6 +29,7 @@
     - [Remove-MS-Edge](#remove-ms-edge)
   - [📫 Outlook](#-outlook)
   - [🔧 Hardware Management](#-hardware-management)
+  - [Others](#others)
 
 ## 🔐 Activate Windows 10 Professional
 
@@ -224,3 +225,7 @@ Y6F3R-C1HD6-2TDJB-HDSZY-F9T3M
 4H514-EYYD6-1MDKP-SDA7Y-UKQSG
 FPPSY-VUTD6-56DJX-2D2KY-WD2UW
 ```
+
+## Others
+
+> 微软拼音输入法在**输入时**，按 <kbd>Shift</kbd> + <kbd>Space</kbd> 会切换从`半角`切换为`全角`，再次按 <kbd>Shift</kbd> + <kbd>Space</kbd> 便能切换回去。
