@@ -11,6 +11,7 @@
       - [Start](#start)
     - [Windows 默认应用设置（Default apps）](#windows-默认应用设置default-apps)
     - [App Execution Aliases](#app-execution-aliases)
+    - [连按 5 次 Shift 开启粘滞键](#连按-5-次-shift-开启粘滞键)
   - [⛑️ Sandboxie-Plus](#️-sandboxie-plus)
     - [需要隔离运行的软件](#需要隔离运行的软件)
   - [⛑️ Window Sandbox](#️-window-sandbox)
@@ -88,6 +89,12 @@ This command creates a copy of the hidden "Ultimate Performance" power plan on w
 <kbd>Win</kbd> + <kbd>R</kbd> → `ms-settings:defaultapps`
 
 ### App Execution Aliases
+
+### 连按 5 次 Shift 开启粘滞键
+
+<kbd>Win</kbd> + <kbd>I</kbd> > `Ease of Access` > `Keyboard` 
+
+- ❌ `Allow the shortcut key to start Sticy Keys`
 
 ## ⛑️ Sandboxie-Plus
 
