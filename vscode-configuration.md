@@ -49,6 +49,7 @@ After executing the command, restart Visual Studio Code for the changes to take 
 
 ``` json
 {
+    "chat.disableAIFeatures": true,
     "editor.cursorBlinking": "smooth",
     "editor.cursorSmoothCaretAnimation": "on",
     "editor.lineNumbers": "on",
@@ -175,4 +176,3 @@ After executing the command, restart Visual Studio Code for the changes to take 
     ]
 }
 ```
-
