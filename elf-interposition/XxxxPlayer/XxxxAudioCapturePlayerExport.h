@@ -1,0 +1,37 @@
+#include "XxxxPlayerDefine.h"
+
+typedef enum NP_ENUM_AUDIO_CAPTURE_DEVICE_TYPE
+{
+    NP_ENUM_AUDIO_CAPTURE_NONE_DEVICE = 0,        //none audio
+    NP_ENUM_AUDIO_CAPTURE_INPUT_AUDIO_DEVICE = 1,     //input audio, capture
+    NP_ENUM_AUDIO_CAPTURE_OUTPUT_AUDIO_DEVICE = 2,     //output audio, render
+    NP_ENUM_AUDIO_CAPTURE_APP_OUTPUT_AUDIO_DEVICE = 4,     //application audio, render
+    NP_ENUM_AUDIO_CAPTURE_INPUT_OUTPUT_AUDIO_DEVICE = NP_ENUM_AUDIO_CAPTURE_INPUT_AUDIO_DEVICE + NP_ENUM_AUDIO_CAPTURE_OUTPUT_AUDIO_DEVICE,
+    NP_ENUM_AUDIO_CAPTURE_ALL_AUDIO_DEVICE = NP_ENUM_AUDIO_CAPTURE_INPUT_AUDIO_DEVICE + NP_ENUM_AUDIO_CAPTURE_OUTPUT_AUDIO_DEVICE + NP_ENUM_AUDIO_CAPTURE_APP_OUTPUT_AUDIO_DEVICE,
+
+}NP_ENUM_AUDIO_CAPTURE_DEVICE_TYPE;
+
+typedef enum NP_AUDIO_CAPTURE_DEVICE_TYPE
+{
+    NP_AUDIO_CAPTURE_NONE_DEVICE = 0,        //none audio
+    NP_AUDIO_CAPTURE_INPUT_AUDIO_DEVICE = 1,     //input audio, capture
+    NP_AUDIO_CAPTURE_OUTPUT_AUDIO_DEVICE = 2,     //output audio, render
+    NP_AUDIO_CAPTURE_APP_OUTPUT_AUDIO_DEVICE = 4,     //application audio, render
+    NP_AUDIO_CAPTURE_INPUT_DSHOW_AUDIO_DEVICE = 8,     //input audio, capture
+
+}NP_AUDIO_CAPTURE_DEVICE_TYPE;
+
+typedef struct NP_AUDIO_DEVICE_INFO_NODE
+{
+    //audio name
+    const char* audio_id = nullptr;
+    const char* audio_show_name = nullptr;
+    //audio type
+    NP_AUDIO_CAPTURE_DEVICE_TYPE audio_mode = NP_AUDIO_CAPTURE_NONE_DEVICE;
+    //next audio node
+    NP_AUDIO_DEVICE_INFO_NODE* next = nullptr;
+} NP_AUDIO_DEVICE_INFO_NODE;
+
+extern "C" {
+XxxxPLAYER_EXPORT NP_AUDIO_DEVICE_INFO_NODE* NPEnumAudioCaptureDevices(NP_ENUM_AUDIO_CAPTURE_DEVICE_TYPE enum_type);
+}
