@@ -1,0 +1,12 @@
+diff --git a/cli_ure/source/native/native_bootstrap.cxx b/cli_ure/source/native/native_bootstrap.cxx
+index f26a634c2aa1..4e0f999f48be 100644
+--- a/cli_ure/source/native/native_bootstrap.cxx
++++ b/cli_ure/source/native/native_bootstrap.cxx
+@@ -285,7 +285,7 @@ Bootstrap::defaultBootstrap_InitialComponentContext()
+ 
+ ::unoidl::com::sun::star::uno::XComponentContext ^ Bootstrap::bootstrap()
+ {
+-    Reference<XComponentContext> xContext = ::cppu::bootstrap();
++    Reference<XComponentContext> xContext = ::cppu::bootstrap( "", "" );
+     return safe_cast< ::unoidl::com::sun::star::uno::XComponentContext ^ >(
+         to_cli( xContext ) );
