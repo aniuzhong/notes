@@ -1,0 +1,50 @@
+diff --git a/cppuhelper/source/bootstrap.cxx b/cppuhelper/source/bootstrap.cxx
+index bd975460f06c..00dd784461a2 100644
+--- a/cppuhelper/source/bootstrap.cxx
++++ b/cppuhelper/source/bootstrap.cxx
+@@ -81,12 +81,15 @@ const OUString & BootstrapException::getMessage() const
+     return m_aMessage;
+ }
+ 
+-Reference< XComponentContext > SAL_CALL bootstrap()
++Reference< XComponentContext > SAL_CALL bootstrap(
++    const ::rtl::OUString & ustrSofficePath,
++    const ::rtl::OUString & ustrUserInstallation )
+ {
+     Reference< XComponentContext > xRemoteContext;
+ 
+     try
+     {
++#if 0 // No more use cppuhelper_detail_findSofficePath
+         auto* p1 = cppuhelper_detail_findSofficePath();
+         if (p1 == nullptr) {
+             throw BootstrapException(
+@@ -109,6 +112,8 @@ Reference< XComponentContext > SAL_CALL bootstrap()
+                 "bad characters in soffice installation path!");
+         }
+ #endif
++#endif // No more use cppuhelper_detail_findSofficePath
++        OUString p2 = ustrSofficePath; // Specify soffice installation
+         OUString path;
+         if (osl::FileBase::getFileURLFromSystemPath(p2, path) !=
+             osl::FileBase::E_None)
+@@ -158,14 +163,18 @@ Reference< XComponentContext > SAL_CALL bootstrap()
+             OUString("--nodefault"),
+             OUString("--norestore"),
+             OUString("--nolockcheck"),
+-            OUString("--accept=pipe,name=" + sPipeName + ";urp;")
++            OUString("--accept=pipe,name=" + sPipeName + ";urp;"),
++            OUString("-env:UserInstallation=file:///" + ustrUserInstallation),
++            OUString("--pidfile=" + ustrUserInstallation + "/pidfile")
+         };
+         rtl_uString * ar_args [] = {
+             args[ 0 ].pData,
+             args[ 1 ].pData,
+             args[ 2 ].pData,
+             args[ 3 ].pData,
+-            args[ 4 ].pData
++            args[ 4 ].pData,
++            args[ 5 ].pData,
++            args[ 6 ].pData,
+         };
+         ::osl::Security sec;

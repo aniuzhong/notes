@@ -1,0 +1,15 @@
+diff --git a/sd/source/console/PresenterScreen.cxx b/sd/source/console/PresenterScreen.cxx
+index cd6c20d38cc5..91e6bf195d2b 100644
+--- a/sd/source/console/PresenterScreen.cxx
++++ b/sd/source/console/PresenterScreen.cxx
+@@ -209,8 +209,10 @@ void SAL_CALL PresenterScreenListener::notifyEvent( const css::document::EventOb
+     if ( Event.EventName == "OnStartPresentation" )
+     {
+         mpPresenterScreen = new PresenterScreen(mxComponentContext, mxModel);
++#if 0
+         if(PresenterScreen::isPresenterScreenEnabled(mxComponentContext))
+             mpPresenterScreen->InitializePresenterScreen();
++#endif
+     }
+     else if ( Event.EventName == "OnEndPresentation" )
+     {

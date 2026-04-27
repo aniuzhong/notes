@@ -1,0 +1,15 @@
+diff --git a/include/cppuhelper/bootstrap.hxx b/include/cppuhelper/bootstrap.hxx
+index b8cc113f57c6..76dc01671f5a 100644
+--- a/include/cppuhelper/bootstrap.hxx
++++ b/include/cppuhelper/bootstrap.hxx
+@@ -138,7 +138,9 @@ private:
+  * @since UDK 3.2.0
+  */
+ CPPUHELPER_DLLPUBLIC css::uno::Reference< css::uno::XComponentContext >
+-SAL_CALL bootstrap();
++SAL_CALL bootstrap(
++    const ::rtl::OUString & ustrSofficePath,
++    const ::rtl::OUString & ustrUserInstallation);
+ 
+ /// @cond INTERNAL
+ /**
