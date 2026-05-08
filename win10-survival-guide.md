@@ -30,6 +30,11 @@
     - [Remove-MS-Edge](#remove-ms-edge)
   - [📫 Outlook](#-outlook)
   - [🔧 Hardware Management](#-hardware-management)
+  - [📂 Office Tool Plus](#-office-tool-plus)
+    - [一、下载软件](#一下载软件)
+    - [二、安装 office](#二安装-office)
+    - [三、安装许可证](#三安装许可证)
+    - [四、激活 office](#四激活-office)
   - [Others](#others)
 
 ## 🔐 Activate Windows 10 Professional
@@ -232,6 +237,61 @@ Y6F3R-C1HD6-2TDJB-HDSZY-F9T3M
 4H514-EYYD6-1MDKP-SDA7Y-UKQSG
 FPPSY-VUTD6-56DJX-2D2KY-WD2UW
 ```
+
+## 📂 [Office Tool Plus](https://otp.landian.vip/en-us)
+
+### 一、下载软件
+
+[官方下载地址](https://otp.landian.vip/zh-cn/download.html)
+
+建议选择云图小镇和山东大学镜像的下载入口。
+
+### 二、安装 office
+
+进入软件后为了确保我们 Windows 没有其他版本的 office，需要对原本存在的 Office 程序或卸载残留进行清理。
+
+点击左侧工具栏中的**工具箱**-**移除Office**-**开始**-**是**，等待操作完成即可。
+
+开始安装Office，按照下所示步骤依次点击或完成：
+
+1. 点击左侧工具栏中的**部署**。
+2. **部署模式** 选择 **安装**。
+3. **体系结构**选择 **64 位**
+4. **更新通道** 选择 **Office 2024 企业长期版**。
+5. **安装模块**选择 **Office Tool Plus**
+6. 勾选**下载后再部署**，这样大大加快下载速度。
+7. 点击 **产品** 中的 **添加产品(P)** 选项，选择 **产品ID:ProPlus2024Volume**
+8. 按照自己需求选择所需的办公软件，这里选择 **Word**、**Excel**、**PowerPoint**
+9. **语言**选择 **zh-cn**、**en-US**。
+10. **安装文件**中删除 Office 安装文件（如果有）
+11. 点击**开始部署**，等待软件自动下载和安装完成。
+
+### 三、安装许可证
+
+软件安装完成后我们还需要设置产品许可证。
+
+我们只需要在 Office Tool Plus 里按照步骤找到我们下载的对应版本许可证点击安装等待完成即可。
+
+1. 点击左侧工具栏中的**激活**。
+2. **许可证管理** - **安装许可证** - **安装** - **Office LTSC 专业增强版 2024** - **批量许可证** - **确定**
+
+### 四、激活 office
+
+- 自己有相关正版激活账号，且自己安装的也是对应的 Office 版本，则打开任意一个 Office 软件登陆账号即可激活。
+
+- 安装的批量版本如 “Office2024 批量许可证” 可使用 KMS 管理，推荐三个稳定可用的 KMS。
+
+```
+kms.loli.beer
+kms.luochenzhimu.com
+kms9.MSGuides.com
+```
+
+按照下流程进行：
+
+1. 输入kms主机地址。
+2. 保存设置。
+3. 点击等待完成
 
 ## Others
 
