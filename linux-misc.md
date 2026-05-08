@@ -1,6 +1,9 @@
 # Linux 杂记
 
 - [Linux 杂记](#linux-杂记)
+  - [Ubuntu 26.04 LTS](#ubuntu-2604-lts)
+    - [关闭自动熄屏](#关闭自动熄屏)
+    - [Claude Code - DeepSeek - CC Switch](#claude-code---deepseek---cc-switch)
   - [查看某一内核版本是否支持某硬件](#查看某一内核版本是否支持某硬件)
   - [在 Linux 某一发行版上使用 N 卡调用 VAAPI 进行视频硬件加速](#在-linux-某一发行版上使用-n-卡调用-vaapi-进行视频硬件加速)
   - [CentOS Stream 8 BaseOS ISO 镜像地址 (x86\_64)](#centos-stream-8-baseos-iso-镜像地址-x86_64)
@@ -12,6 +15,36 @@
     - [编译安装 mpc-1.2.1](#编译安装-mpc-121)
     - [编译安装 gcc-12.2.0](#编译安装-gcc-1220-1)
     - [使用 gcc-12.2.0](#使用-gcc-1220)
+
+## Ubuntu 26.04 LTS
+
+### 关闭自动熄屏
+
+`Settings` > `Power` > `Power Savingj` > `Automatic Screen Blank`
+
+### Claude Code - DeepSeek - CC Switch
+
+```bash
+curl -fsSL https://claude.ai/install.sh | bash
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc && source ~/.bashrc
+```
+
+下载 [CC Switch](https://github.com/farion1231/cc-switch/releases)
+
+```bash
+sudo apt install ./CC-Switch-v3.14.1-Linux-x86_64.deb
+```
+
+添加 DeepSeek
+
+`(+)` > `DeepSeek`
+
+- Main Model: deepseek-v4-pro[1m]
+- Default Haiku Model: deepseek-v4-flash
+- Default Sonnet Model: deepseek-v4-pro[1m]
+- Default Oput Model: deepseek-v4-pro[1m]
+
+运行，测试。
 
 ## 查看某一内核版本是否支持某硬件
 
