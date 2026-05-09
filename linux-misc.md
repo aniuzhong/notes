@@ -1,9 +1,14 @@
 # Linux 杂记
 
 - [Linux 杂记](#linux-杂记)
-  - [Ubuntu 26.04 LTS](#ubuntu-2604-lts)
+  - [**Ubuntu 26.04 LTS**](#ubuntu-2604-lts)
+    - [默认中文输入法](#默认中文输入法)
     - [关闭自动熄屏](#关闭自动熄屏)
     - [Claude Code - DeepSeek - CC Switch](#claude-code---deepseek---cc-switch)
+  - [**Kylin v10 (SP1)**](#kylin-v10-sp1)
+    - [v2rayN 支持情况](#v2rayn-支持情况)
+    - [Claude Code 支持情况](#claude-code-支持情况)
+    - [CC Switch 支持情况](#cc-switch-支持情况)
   - [查看某一内核版本是否支持某硬件](#查看某一内核版本是否支持某硬件)
   - [在 Linux 某一发行版上使用 N 卡调用 VAAPI 进行视频硬件加速](#在-linux-某一发行版上使用-n-卡调用-vaapi-进行视频硬件加速)
   - [CentOS Stream 8 BaseOS ISO 镜像地址 (x86\_64)](#centos-stream-8-baseos-iso-镜像地址-x86_64)
@@ -16,7 +21,20 @@
     - [编译安装 gcc-12.2.0](#编译安装-gcc-1220-1)
     - [使用 gcc-12.2.0](#使用-gcc-1220)
 
-## Ubuntu 26.04 LTS
+## **Ubuntu 26.04 LTS**
+
+现代 Linux 桌面的核心基础设施已发生变革：
+
+- 显示服务从 X11 向 Wayland 迁移
+- 音视频服务已基本统一到 PipeWire 框架之下
+
+### 默认中文输入法
+
+`Settings` > `Region & Language` > `Manage Installed Languages` > `Install / Remove Languages`
+
+**重启**。
+
+`Settings` > `Keyboard` > `Input Sources` > `Add Input Source` > **`Chinese (Intelligent Pinyin)`**
 
 ### 关闭自动熄屏
 
@@ -45,6 +63,31 @@ sudo apt install ./CC-Switch-v3.14.1-Linux-x86_64.deb
 - Default Oput Model: deepseek-v4-pro[1m]
 
 运行，测试。
+
+## **Kylin v10 (SP1)**
+
+银河麒麟桌面操作系统 V10 SP1
+
+### v2rayN 支持情况
+
+当前最新版 7.21.2 下载 `v2rayN-linux-64.zip` 可运行，`deb` 版本安装不上。
+
+### Claude Code 支持情况
+
+截至目前，官方脚本可安装。
+
+### CC Switch 支持情况
+
+不能安装。只能手写环境变量。
+
+```bash
+export ANTHROPIC_BASE_URL="https://api.deepseek.com/anthropic"
+export ANTHROPIC_AUTH_TOKEN=""
+export ANTHROPIC_MODEL="deepseek-v4-pro[1m]"
+export ANTHROPIC_DEFAULT_HAIKU_MODEL="deepseek-v4-flash"
+export ANTHROPIC_DEFAULT_SONNET_MODEL="deepseek-v4-pro[1m]"
+export ANTHROPIC_DEFAULT_OPUS_MODEL="deepseek-v4-pro[1m]"
+```
 
 ## 查看某一内核版本是否支持某硬件
 
