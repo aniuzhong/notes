@@ -2,6 +2,7 @@
 
 - [Windows 10 Survival Guide](#windows-10-survival-guide)
   - [🔐 Activate Windows 10 Professional](#-activate-windows-10-professional)
+  - [✋ 不再接收 Windows 11 的任何更新](#-不再接收-windows-11-的任何更新)
   - [⚙️ Windows Settings](#️-windows-settings)
     - [System Locale](#system-locale)
     - [🔋 Ultimate Performance Power Plan](#-ultimate-performance-power-plan)
@@ -46,6 +47,16 @@ slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX
 slmgr /skms kms.03k.org
 slmgr /ato
 ```
+
+## ✋ 不再接收 Windows 11 的任何更新
+
+<kbd>Win</kbd> + <kbd>R</kbd> → `gpedit.msc`
+
+`Computer Configuration` → `Administrative Templates` → `Windows Components` → `Windows Update` → `Windows Update for Business` → **`Select the target Feature Update version`**
+
+- Enabled
+- Windows 10
+- 22H2
 
 ## ⚙️ Windows Settings
 
