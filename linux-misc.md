@@ -9,6 +9,7 @@
     - [v2rayN 支持情况](#v2rayn-支持情况)
     - [Claude Code 支持情况](#claude-code-支持情况)
     - [CC Switch 支持情况](#cc-switch-支持情况)
+  - [WSL2](#wsl2)
   - [查看某一内核版本是否支持某硬件](#查看某一内核版本是否支持某硬件)
   - [在 Linux 某一发行版上使用 N 卡调用 VAAPI 进行视频硬件加速](#在-linux-某一发行版上使用-n-卡调用-vaapi-进行视频硬件加速)
   - [CentOS Stream 8 BaseOS ISO 镜像地址 (x86\_64)](#centos-stream-8-baseos-iso-镜像地址-x86_64)
@@ -88,6 +89,22 @@ export ANTHROPIC_DEFAULT_HAIKU_MODEL="deepseek-v4-flash"
 export ANTHROPIC_DEFAULT_SONNET_MODEL="deepseek-v4-pro[1m]"
 export ANTHROPIC_DEFAULT_OPUS_MODEL="deepseek-v4-pro[1m]"
 ```
+
+## WSL2
+
+WSL2 不支持 VAAPI 视频硬件解码：
+
+- 无 /dev/dri/renderD128
+- GPU 驱动是 dxgkrnl 而非 i915
+
+CUDA 硬解纹理只能在 CUDA 内部做处理（转换、缩放等都行），唯独显示前需要 cudaMemcpy 到 CPU，因为
+
+- GPU 显示端：Mesa D3D12 -> Intel UHD Graphics 770 (iGPU 硬件)
+- GPU 计算端：CUDA
+
+两边的厂商、驱动、GPU 完全不同。WSLg 把显示交给 Mesa（Intel iGPU），CUDA 跑在 NVIDIA 独显上。
+
+> 原生 Linux（同一家驱动）。
 
 ## 查看某一内核版本是否支持某硬件
 
