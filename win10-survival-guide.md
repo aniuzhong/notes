@@ -307,3 +307,5 @@ kms9.MSGuides.com
 ## Others
 
 > 微软拼音输入法在**输入时**，按 <kbd>Shift</kbd> + <kbd>Space</kbd> 会切换从`半角`切换为`全角`，再次按 <kbd>Shift</kbd> + <kbd>Space</kbd> 便能切换回去。
+
+修复磁盘 `chkdsk /f E:`
