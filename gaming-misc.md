@@ -7,6 +7,7 @@
     - [第三步：修改动态端口范围](#第三步修改动态端口范围)
   - [Steam 平台 `暴雨` Xbox 手柄右摇杆旋转不灵敏的解决方案](#steam-平台-暴雨-xbox-手柄右摇杆旋转不灵敏的解决方案)
   - [Steam 平台 `极乐迪斯科` Xbox 手柄没有切换语言键位的解决方法](#steam-平台-极乐迪斯科-xbox-手柄没有切换语言键位的解决方法)
+  - [Wallpaper Engine 动态壁纸导出图片](#wallpaper-engine-动态壁纸导出图片)
 
 ## EA 端口 3216 被占用问题解决方案
 
@@ -75,3 +76,14 @@ netsh int ip set dynamicport tcp start=49152 num=16384
 2. 连接 🎮，点击右边 `View controller settings`；
 3. 点击 `Edit Layout`；
 4. 点击 MENU BUTTON 中的 `Select` 键，`Settings` > `Add extra command` > `Keyboard` > `Q`
+
+## Wallpaper Engine 动态壁纸导出图片
+
+右键壁纸 -> `Play in Window` -> `Full HD Preview`，然后对 `Wallpaper Pop-out` 先放大，后截屏。
+
+```powershell
+.\scripts\Capture-Window-4K.ps1                              # 默认找 "Wallpaper Pop-out" 截 3840x2160
+.\scripts\Capture-Window-4K.ps1 -Width 1920 -Height 1080     # 换分辨率
+.\scripts\Capture-Window-4K.ps1 -OutFile "$env:USERPROFILE\Desktop\wall_4k.png"
+.\scripts\Capture-Window-4K.ps1 -ListWindows                 # 列出所有窗口标题，便于排查
+```
