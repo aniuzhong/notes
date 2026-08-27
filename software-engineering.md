@@ -20,6 +20,9 @@ MVP（Minimum Viable Product，最小可行产品）就是：
 
 > 用最少的资源、最快的速度，先做出一个"能用的"版本。
 
+## ROI
+
+ROI 是 Return on Investment 的缩写。开发时，常说要优先做**高 ROI**的需求。
 
 ## 绞杀者模式
 
