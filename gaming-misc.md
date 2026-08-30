@@ -7,6 +7,8 @@
     - [第三步：修改动态端口范围](#第三步修改动态端口范围)
   - [Steam 平台 `暴雨` Xbox 手柄右摇杆旋转不灵敏的解决方案](#steam-平台-暴雨-xbox-手柄右摇杆旋转不灵敏的解决方案)
   - [Steam 平台 `极乐迪斯科` Xbox 手柄没有切换语言键位的解决方法](#steam-平台-极乐迪斯科-xbox-手柄没有切换语言键位的解决方法)
+  - [Windows 平台 `看火人` (Firewatch) 晕 3D 解决方案 (来自 Steam 社区玩家)](#windows-平台-看火人-firewatch-晕-3d-解决方案-来自-steam-社区玩家)
+    - [修改 Firewatch 中的 FOV](#修改-firewatch-中的-fov)
   - [Wallpaper Engine 动态壁纸导出图片](#wallpaper-engine-动态壁纸导出图片)
 
 ## EA 端口 3216 被占用问题解决方案
@@ -76,6 +78,30 @@ netsh int ip set dynamicport tcp start=49152 num=16384
 2. 连接 🎮，点击右边 `View controller settings`；
 3. 点击 `Edit Layout`；
 4. 点击 MENU BUTTON 中的 `Select` 键，`Settings` > `Add extra command` > `Keyboard` > `Q`
+
+## Windows 平台 `看火人` (Firewatch) 晕 3D 解决方案 (来自 Steam 社区玩家)
+
+Firewatch 的默认 FOV (field of view) 是 55，这个数值比很多第一人称游戏都小很多，所以如果玩 Firewatch 时感觉头晕可以选择调整一下 FOV。
+
+### 修改 Firewatch 中的 FOV
+
+1. 按 `Win + R` 打开“运行”，输入 `regedit.exe` 并回车，打开注册表编辑器。
+2. 导航至以下路径：`HKEY_CURRENT_USER\Software\CampoSanto\Firewatch`
+3. 找到键值 `fovAdjust_h2041137991`，右键选择“修改”。
+4. 将“基数”设为“十进制”。
+
+**FOV 计算方式**
+
+游戏默认 FOV 为 55。输入的数值 =（目标 FOV − 55）× 100。示例：
+
+- 目标 90 → 输入 `3500`（(90−55)×100）
+- 目标 40 → 输入 `-1500`（(40−55)×100）
+
+**注意事项**
+
+- 修改前请确保 Firewatch 未运行。
+- FOV 过大会导致手臂模型显示异常（手臂可能穿模）。
+- 默认 FOV 为 55 或许是因为手臂模型本身较短。
 
 ## Wallpaper Engine 动态壁纸导出图片
 
