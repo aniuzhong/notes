@@ -14,6 +14,7 @@
     - [Chrome](#chrome)
       - [桌面集成（让 Chrome 出现在菜单/默认应用，并接管网页链接）](#桌面集成让-chrome-出现在菜单默认应用并接管网页链接)
     - [VS Code](#vs-code)
+    - [PyCharm](#pycharm)
     - [v2rayN](#v2rayn)
     - [企业微信 (不支持)](#企业微信-不支持)
     - [个人微信](#个人微信)
@@ -168,6 +169,10 @@ xdg-mime default google-chrome.desktop x-scheme-handler/http x-scheme-handler/ht
 可安装版本：
 
 - code_1.134.0-1787078834_amd64.deb
+
+### PyCharm
+
+- flatpak 可装
 
 ### v2rayN
 
