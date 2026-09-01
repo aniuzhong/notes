@@ -24,6 +24,10 @@ MVP（Minimum Viable Product，最小可行产品）就是：
 
 ROI 是 Return on Investment 的缩写。开发时，常说要优先做**高 ROI**的需求。
 
+## POC
+
+概念验证（Proof of Concept）, 指的是为了验证某个技术设想、算法或架构方案是否可行，而构建的一个小型、实验性的原型系统。
+
 ## 绞杀者模式
 
 绞杀者模式（Strangler Pattern，也叫绞杀者模式或扼杀模式）就是：
