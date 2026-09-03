@@ -7,6 +7,7 @@
     - [系统崩溃复盘 (重要教训)](#系统崩溃复盘-重要教训)
   - [可安全从系统软件源安装的软件包](#可安全从系统软件源安装的软件包)
   - [NVIDIA 闭源驱动 + CUDA 安装经验总结](#nvidia-闭源驱动--cuda-安装经验总结)
+  - [使用 N 卡调用 VAAPI 进行视频硬件加速](#使用-n-卡调用-vaapi-进行视频硬件加速)
   - [软件支持情况](#软件支持情况)
     - [Flatpak](#flatpak)
     - [Firefox](#firefox)
@@ -18,6 +19,13 @@
     - [v2rayN](#v2rayn)
     - [企业微信 (不支持)](#企业微信-不支持)
     - [个人微信](#个人微信)
+  - [编译安装 GCC 12.2.0](#编译安装-gcc-1220)
+    - [编译安装 gmp-6.2.1](#编译安装-gmp-621)
+    - [编译安装 isl-0.24](#编译安装-isl-024)
+    - [编译安装 mpfr-4.1.0](#编译安装-mpfr-410)
+    - [编译安装 mpc-1.2.1](#编译安装-mpc-121)
+    - [编译安装 gcc-12.2.0](#编译安装-gcc-1220-1)
+    - [使用 gcc-12.2.0](#使用-gcc-1220)
   - [AI](#ai)
 
 未激活 ≠ 功能阉割。现状继续用完全没问题。
@@ -93,6 +101,35 @@ sudo apt install automake m4 ccache nasm graphviz python3-dev libcups2-dev libfo
 经过验证的驱动版本:
 
 - cuda_12.8.1_570.124.06_linux.run
+
+## 使用 N 卡调用 VAAPI 进行视频硬件加速
+
+以下条件均需要正确满足
+
+- VA-API 标准接口
+- libva VA-API 的实现库
+- NVIDIA 驱动
+- nvidia-vaapi-driver 开源软件，在 Linux 系统中为 NVIDIA GPU 提供 VA-API 接口支持
+
+参考 ArchWiki，使用 mpv 检测当前系统的 vaapi 是否可用。
+
+```Bash
+mpv --vo=gpu --hwdec=vaapi /path/to/video_file
+```
+
+> 从实践经验来看，优先参考 Ubuntu 发行版软件仓库的版本配对。
+
+**Ubuntu 24.04**
+
+| Driver Version | CUDA Version | nvidia-vaapi-driver | VA-API | libva  |
+| -------------- | ------------ | ------------------- | ------ | ------ |
+| 550.120        | 12.4         | v0.0.8              | 1.20   | 2.12.0 |
+
+**Ubuntu 24.10**
+
+| Driver Version | CUDA Version | nvidia-vaapi-driver | VA-API | libva  |
+| -------------- | ------------ | ------------------- | ------ | ------ |
+| 560.35.03      | 12.6         | v0.0.12             | 1.22   | 2.22.0 |
 
 ## 软件支持情况
 
@@ -185,6 +222,74 @@ xdg-mime default google-chrome.desktop x-scheme-handler/http x-scheme-handler/ht
 ### 个人微信
 
 支持，[下载地址](https://linux.weixin.qq.com/en)
+
+## 编译安装 GCC 12.2.0
+
+> Kylin V10 自带 GCC 编译器不支持 C++20，需要手动编译高版本 GCC
+
+### 编译安装 gmp-6.2.1
+
+``` shell
+wget ftp://gcc.gnu.org/pub/gcc/infrastructure/gmp-6.2.1.tar.bz2
+tar -jxf gmp-6.2.1.tar.bz2
+cd gmp-6.2.1
+./configure --prefix=/opt/local/gmp-6.2.1
+make -j8
+make install
+```
+
+### 编译安装 isl-0.24
+
+``` shell
+wget ftp://gcc.gnu.org/pub/gcc/infrastructure/isl-0.24.tar.bz2
+tar -jxf isl-0.24.tar.bz2
+cd isl-0.24
+./configure --prefix=/opt/local/isl-0.24 --with-gmp-prefix=/opt/local/gmp-6.2.1
+make -j8
+make install
+```
+
+### 编译安装 mpfr-4.1.0
+
+``` shell
+wget ftp://gcc.gnu.org/pub/gcc/infrastructure/mpfr-4.1.0.tar.bz2
+tar -jxf mpfr-4.1.0.tar.bz2
+cd mpfr-4.1.0
+./configure --prefix=/opt/local/mpfr-4.1.0 --with-gmp=/opt/local/gmp-6.2.1
+make -j8
+make install
+```
+
+### 编译安装 mpc-1.2.1
+
+``` shell
+wget ftp://gcc.gnu.org/pub/gcc/infrastructure/mpc-1.2.1.tar.gz
+tar -zxf mpc-1.2.1.tar.gz
+cd mpc-1.2.1
+./configure --prefix=/opt/local/mpc-1.2.1 --with-gmp=/opt/local/gmp-6.2.1 --with-mpfr=/opt/local/mpfr-4.1.0
+make -j8
+make install
+```
+
+### 编译安装 gcc-12.2.0
+
+``` shell
+wget https://ftp.gnu.org/gnu/gcc/gcc-12.2.0/gcc-12.2.0.tar.gz
+export LD_LIBRARY_PATH=/opt/local/gmp-6.2.1/lib:/opt/local/mpfr-4.1.0/lib:/opt/local/mpc-1.2.1/lib:/opt/local/isl-0.24/lib:$LD_LIBRARY_PATH
+tar -zxf gcc-12.2.0.tar.gz
+cd gcc-12.2.0
+./configure --prefix=/opt/local/gcc-12.2.0 --with-gmp=/opt/local/gmp-6.2.1 --with-mpfr=/opt/local/mpfr-4.1.0 --with-mpc=/opt/local/mpc-1.2.1 --with-isl=/opt/local/isl-0.24 --disable-multilib
+make -j8
+make install
+```
+
+### 使用 gcc-12.2.0
+
+``` shell
+export LD_LIBRARY_PATH=/opt/local/gmp-6.2.1/lib:/opt/local/mpfr-4.1.0/lib:/opt/local/mpc-1.2.1/lib:/opt/local/isl-0.24/lib:$LD_LIBRARY_PATH
+export CC=/opt/local/gcc-12.2.0/bin/gcc
+export CXX=/opt/local/gcc-12.2.0/bin/g++
+```
 
 ## AI
 
