@@ -1,5 +1,21 @@
 # 软件工程
 
+- [软件工程](#软件工程)
+  - [**`The Mythical Man-Month - 人月神话`**](#the-mythical-man-month---人月神话)
+    - [没有银弹 (No Silver Bullet)](#没有银弹-no-silver-bullet)
+  - [golden file / golden test / baseline test](#golden-file--golden-test--baseline-test)
+  - [灰度测试](#灰度测试)
+  - [MVP](#mvp)
+  - [ROI](#roi)
+  - [POC](#poc)
+  - [绞杀者模式](#绞杀者模式)
+
+## **`The Mythical Man-Month - 人月神话`**
+
+### 没有银弹 (No Silver Bullet)
+
+> 没有任何单一技术或管理方法能在十年内使软件生产力提升一个数量级。软件开发的根本困难在于概念性设计（思考做什么），而非实现（编码），后者可以通过工具改进，但前者难以被自动化。
+
 ## golden file / golden test / baseline test
 
 基准测试、黄金用例、夹具...
