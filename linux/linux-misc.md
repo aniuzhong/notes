@@ -6,7 +6,7 @@
 
 ## `ld-linux.so` 搜索 `.so` 的顺序
 
-[Python 伪代码建模](ld-so-model.py)
+[Python 伪代码建模(概念示意)](ld-so-model.py)
 
 ## 查看某一内核版本是否支持某硬件
 
