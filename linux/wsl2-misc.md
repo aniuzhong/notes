@@ -38,4 +38,4 @@ CUDA 硬解纹理只能在 CUDA 内部做处理（转换、缩放等都行），
 
 两边的厂商、驱动、GPU 完全不同。WSLg 把显示交给 Mesa（Intel iGPU），CUDA 跑在 NVIDIA 独显上。
 
-> 原生 Linux（同一家驱动）。## WSL2
+> 原生 Linux（同一家驱动）。
