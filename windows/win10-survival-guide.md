@@ -15,6 +15,7 @@
     - [连按 5 次 Shift 开启粘滞键](#连按-5-次-shift-开启粘滞键)
   - [⛑️ Sandboxie-Plus](#️-sandboxie-plus)
     - [需要隔离运行的软件](#需要隔离运行的软件)
+  - [Powershell 7](#powershell-7)
   - [⛑️ Window Sandbox](#️-window-sandbox)
   - [🗑️ Uninstall Tool](#️-uninstall-tool)
     - [Pre-installed apps (that safe to uninstall)](#pre-installed-apps-that-safe-to-uninstall)
@@ -127,6 +128,14 @@ This command creates a copy of the hidden "Ultimate Performance" power plan on w
 - 2345好压
 - 2345看图王
 - 360压缩
+
+## Powershell 7
+
+Press <kbd>Win</kbd> + <kbd>X</kbd>, then click **Windows PowerShell (Admin)**.
+
+```shell
+winget install --id Microsoft.PowerShell --exact
+```
 
 ## ⛑️ Window Sandbox
 
