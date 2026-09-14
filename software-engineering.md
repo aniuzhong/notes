@@ -9,6 +9,7 @@
   - [ROI](#roi)
   - [POC](#poc)
   - [绞杀者模式](#绞杀者模式)
+  - [YAGHI](#yaghi)
 
 ## **`The Mythical Man-Month - 人月神话`**
 
@@ -49,3 +50,7 @@ ROI 是 Return on Investment 的缩写。开发时，常说要优先做**高 ROI
 绞杀者模式（Strangler Pattern，也叫绞杀者模式或扼杀模式）就是：
 
 > 不直接推翻旧系统重写，而是用新功能一点点蚕食、替换旧系统，最终旧系统自然"死亡"。
+
+## YAGHI
+
+> 别写你现在用不上的代码。
