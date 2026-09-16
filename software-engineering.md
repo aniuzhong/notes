@@ -3,6 +3,7 @@
 - [软件工程](#软件工程)
   - [**`The Mythical Man-Month - 人月神话`**](#the-mythical-man-month---人月神话)
     - [没有银弹 (No Silver Bullet)](#没有银弹-no-silver-bullet)
+  - [人机协同 (人+Agent)](#人机协同-人agent)
   - [golden file / golden test / baseline test](#golden-file--golden-test--baseline-test)
   - [灰度测试](#灰度测试)
   - [MVP](#mvp)
@@ -16,6 +17,13 @@
 ### 没有银弹 (No Silver Bullet)
 
 > 没有任何单一技术或管理方法能在十年内使软件生产力提升一个数量级。软件开发的根本困难在于概念性设计（思考做什么），而非实现（编码），后者可以通过工具改进，但前者难以被自动化。
+
+## 人机协同 (人+Agent)
+
+1. 人的时间和精力是有限的。
+2. 一种技能如果长期不用，会退化；如果想让它一直保持熟练，就得持续练习。
+
+> 现在看不到足够的理由去**长期支付这种维护成本**（某项特定技术），为了一个 **没法使用 Agent** 的场景。
 
 ## golden file / golden test / baseline test
 
