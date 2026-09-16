@@ -27,6 +27,23 @@
     - [编译安装 gcc-12.2.0](#编译安装-gcc-1220-1)
     - [使用 gcc-12.2.0](#使用-gcc-1220)
   - [AI](#ai)
+  - [Windows 10 KVM 配置](#windows-10-kvm-配置)
+    - [虚拟机基本信息](#虚拟机基本信息)
+    - [性能优化](#性能优化)
+      - [CPU 拓扑修复](#cpu-拓扑修复)
+      - [CPU 绑定](#cpu-绑定)
+      - [大页内存](#大页内存)
+      - [显卡优化](#显卡优化)
+    - [网络配置](#网络配置)
+      - [静态 IP 配置](#静态-ip-配置)
+    - [操作命令](#操作命令)
+      - [启动虚拟机](#启动虚拟机)
+      - [关闭虚拟机](#关闭虚拟机)
+      - [释放大页 (不用虚拟机时)](#释放大页-不用虚拟机时)
+      - [重新分配大页 (内存碎片时)](#重新分配大页-内存碎片时)
+    - [已知问题](#已知问题)
+      - [dnsmasq 崩溃](#dnsmasq-崩溃)
+      - [GPU 直通不可行](#gpu-直通不可行)
 
 未激活 ≠ 功能阉割。现状继续用完全没问题。
 
@@ -302,3 +319,90 @@ export CXX=/opt/local/gcc-12.2.0/bin/g++
 - [x] Devin
 - [x] Qoder
 - [x] OpenCode
+  
+##  Windows 10 KVM 配置
+
+### 虚拟机基本信息
+
+- **名称**: win10
+- **平台**: libvirt / KVM
+- **配置文件**: /etc/libvirt/qemu/win10.xml
+- **磁盘**: /data/vms/win10.qcow2 (65G)
+- **安装镜像**: /data/vms/Win10_22H2_x64_en-us.iso (4.6G)
+- **驱动**: /data/vms/virtio-win.iso (754M)
+- **存储池**: vms (/data/vms)
+- **宿主机**: i7-10700 8核16线程 / 62G内存
+  
+### 性能优化
+
+#### CPU 拓扑修复
+
+- **问题**: 原配置 `-smp 8,sockets=8,cores=1,threads=1` 导致 Windows 10 只认到 2 个 CPU
+- **修复**: 改为 `sockets=1,cores=8,threads=1`
+- **效果**: 从 2 核提升到 8 核，可用算力 ×4
+
+#### CPU 绑定
+
+- **配置**: vcpu0-7 绑定到物理核 0-7，emulator 绑定到 cpu8
+- **目的**: 减少跨核调度和缓存失效
+
+#### 大页内存
+
+- **配置**: 16G 内存使用 2M 大页 (8192 页)
+- **持久化**: `/etc/sysctl.d/60-libvirt-hugepages.conf`
+- **代价**: 宿主机启动后固定占用 16G，即使虚拟机不运行
+
+#### 显卡优化
+
+- **变更**: QXL → virtio-gpu (Red Hat VirtIO GPU DOD controller)
+- **模式**: 2D 显示，无 3D 加速
+- **限制**: 本机只有一块 GPU (NVIDIA Quadro RTX 4000)，无法做 GPU 直通
+
+### 网络配置
+
+#### 静态 IP 配置
+
+- **IP**: 192.168.122.145/24
+- **网关**: 192.168.122.1
+- **DNS**: 223.5.5.5, 114.114.114.114
+- **原因**: libvirt 的 dnsmasq 经常崩溃 (segfault)，静态 IP 绕过 DHCP 依赖
+
+### 操作命令
+
+#### 启动虚拟机
+
+```bash
+virsh start win10
+virt-viewer -c qemu:///system -r win10
+```
+
+#### 关闭虚拟机
+
+```bash
+virsh shutdown win10    # 正常关机
+virsh destroy win10     # 强制断电
+```
+
+#### 释放大页 (不用虚拟机时)
+
+```bash
+sudo sysctl -w vm.nr_hugepages=0
+```
+
+#### 重新分配大页 (内存碎片时)
+
+```bash
+sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches; echo 1 > /proc/sys/vm/compact_memory; sysctl -w vm.nr_hugepages=8192'
+```
+
+### 已知问题
+
+#### dnsmasq 崩溃
+
+- **现象**: libvirt 的 dnsmasq 进程频繁 segfault
+- **影响**: DHCP 和 DNS 失效
+- **解决**: 虚拟机使用静态 IP + 公网 DNS，绕过依赖
+
+#### GPU 直通不可行
+- **原因**: 只有一块 GPU，无核显留给宿主机
+- **建议**: 不要尝试 GPU 直通，会导致宿主机黑屏
