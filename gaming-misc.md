@@ -106,10 +106,3 @@ Firewatch 的默认 FOV (field of view) 是 55，这个数值比很多第一人�
 ## Wallpaper Engine 动态壁纸导出图片
 
 右键壁纸 -> `Play in Window` -> `Full HD Preview`，然后对 `Wallpaper Pop-out` 先放大，后截屏。
-
-```powershell
-.\scripts\Capture-Window-4K.ps1                              # 默认找 "Wallpaper Pop-out" 截 3840x2160
-.\scripts\Capture-Window-4K.ps1 -Width 1920 -Height 1080     # 换分辨率
-.\scripts\Capture-Window-4K.ps1 -OutFile "$env:USERPROFILE\Desktop\wall_4k.png"
-.\scripts\Capture-Window-4K.ps1 -ListWindows                 # 列出所有窗口标题，便于排查
-```
