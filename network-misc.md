@@ -105,9 +105,8 @@ netsh int ip show excludedportrange protocol=tcp
 
 ## Leaks Test
 
-[Browser Leaks](https://browserleaks.com/ip)
-
-[DNS Leak Test](https://dnsleaktest.com)
+- [Browser Leaks](https://browserleaks.com/ip)
+- [DNS Leak Test](https://dnsleaktest.com)
 
 ## 为 WSL2 配置 Windows 代理
 
@@ -116,62 +115,4 @@ netsh int ip show excludedportrange protocol=tcp
 ```
 WSL2  →  Windows网卡(172.17.144.1):10101  →  127.0.0.1:10100(v2rayN)  →  互联网
          └── netsh portproxy 负责 ──┘          └── v2rayN 配置决定 ──┘
-```
-
-```powershell
-# 管理员权限运行
-
-# v2rayN 安装位置
-$v2rayConfig = "C:\Users\hido\Softwares\v2rayN-7.17.3-x64-portable\binConfigs\config.json"
-
-# 查 vEthernet (WSL) 这块虚拟网卡（Hyper-V 给 WSL2 创建的）的 IPv4 地址，
-# 取到的值就是 172.17.144.1 这类东西，放进 $wslIp，
-# 如果没拿到 IP（说明 WSL2 没在运行，虚拟网卡不存在），打印红色错误并退出。
-$wslIp = (Get-NetIPAddress -InterfaceAlias "vEthernet (WSL)" -AddressFamily IPv4).IPAddress
-if (-not $wslIp) {
-    Write-Host "ERROR: WSL2 vEthernet not found. Is WSL running?" -ForegroundColor Red
-    exit 1
-}
-
-# Get-Content -Raw 把整个 config.json 读成一个字符串，管道给 ConvertFrom-Json 解析成 PowerShell 对象。之后就能用 . 访问字段了。
-$config = Get-Content $v2rayConfig -Raw | ConvertFrom-Json
-$proxyPort = $config.inbounds[0].port
-if (-not $proxyPort) {
-    Write-Host "ERROR: Cannot read proxy port from v2rayN config" -ForegroundColor Red
-    exit 1
-}
-
-# 在代理端口基础上 +1 作为转发监听端口，避免和 v2rayN 自己冲突。
-$listenPort = $proxyPort + 1  # 10101
-
-# 删掉之前可能存在的旧规则（如果 IP 变了，旧规则绑的是旧 IP，需要清理）。
-# 2>$null 扔掉 stderr，Out-Null 扔掉 stdout，干净不刷屏。
-netsh interface portproxy delete v4tov4 listenport=$listenPort 2>$null | Out-Null
-
-# 建新规则：在 WSL2 虚拟网卡 IP 上监听 $listenPort，收到的 TCP 流量转发到 127.0.0.1:$proxyPort（v2rayN）。
-netsh interface portproxy add v4tov4 listenaddress=$wslIp listenport=$listenPort connectaddress=127.0.0.1 connectport=$proxyPort
-
-# 打印结果，比如 OK: 172.17.144.1:10101 -> 127.0.0.1:10100 (v2rayN)。`: 是 PowerShell 里冒号的转义写法。
-Write-Host "OK: $wslIp`:$listenPort -> 127.0.0.1`:$proxyPort (v2rayN)" -ForegroundColor Green
-```
-
-在 WSL2 终端里：
-
-```bash
-vim ~/.bashrc
-```
-
-找到这两行：
-
-```bash
-export WIN_HOST=$(sed -n 's/nameserver //p' /etc/resolv.conf)    # 动态取网关IP
-export http_proxy="http://$WIN_HOST:10101"                       # 用这个IP拼代理地址
-export https_proxy="http://$WIN_HOST:10101"
-export no_proxy="localhost,127.0.0.1,*.local,10.*,172.16.*,172.17.*,172.18.*,172.19.*,172.20.*,172.21.*,172.22.*,172.23.*,172.24.*,172.25.*,172.26.*,172.27.*,172.28.*,172.29.*,172.30.*,172.31.*,192.168.*"
-```
-
-验证：
-
-```bash
-curl -I https://www.google.com
 ```
