@@ -3,7 +3,9 @@
 - [软件工程](#软件工程)
   - [**`The Mythical Man-Month - 人月神话`**](#the-mythical-man-month---人月神话)
     - [没有银弹 (No Silver Bullet)](#没有银弹-no-silver-bullet)
-  - [人机协同 (人+Agent)](#人机协同-人agent)
+    - [本质困难 (essential difficulty) 和偶然困难 (accidental difficulty)](#本质困难-essential-difficulty-和偶然困难-accidental-difficulty)
+  - [Vibe Coding (人+Agent)](#vibe-coding-人agent)
+    - [传统抽象与代码生成](#传统抽象与代码生成)
   - [golden file / golden test / baseline test](#golden-file--golden-test--baseline-test)
   - [灰度测试](#灰度测试)
   - [MVP](#mvp)
@@ -18,12 +20,24 @@
 
 > 没有任何单一技术或管理方法能在十年内使软件生产力提升一个数量级。软件开发的根本困难在于概念性设计（思考做什么），而非实现（编码），后者可以通过工具改进，但前者难以被自动化。
 
-## 人机协同 (人+Agent)
+### 本质困难 (essential difficulty) 和偶然困难 (accidental difficulty)
+
+> 软件开发的困难分为本质困难和偶然困难。语法错误、环境配置、框架API——这些都是偶然困难，迟早能解决。但**把一个模糊的现实需求转化成精确的逻辑结构，这是本质困难，不会因为工具进步而消失**。
+
+## Vibe Coding (人+Agent)
 
 1. 人的时间和精力是有限的。
 2. 一种技能如果长期不用，会退化；如果想让它一直保持熟练，就得持续练习。
 
 > 现在看不到足够的理由去**长期支付这种维护成本**（某项特定技术），为了一个 **没法使用 Agent** 的场景。
+
+### 传统抽象与代码生成
+
+> 抽象代表了**一种定义问题的能力**，这在 Vibe Coding 中尤为重要。
+
+`所有抽象都会泄漏 (All non-trivial abstractions, to some degree, are leaky)`, 所以，评估一个抽象的经验法则是问自己：**我需要多长时间 “窥探” 其底层实现一次？**
+
+同样的，在使用 Coding Agent 工具进行代码生成时，也需要经常问自己：**我什么时候需要仔细检查 AI 到底写了什么？**
 
 ## golden file / golden test / baseline test
 
